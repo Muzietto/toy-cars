@@ -10,7 +10,7 @@
 var TC = function(L, V) {
 
   // e.g. '5,6:FFR' --> { startFrame: {origin: (5,6), heading: (5,7)}, moves: ('F','F','R')}
-  function preprocess(instructions) {
+  function _preprocess(instructions) {
     var raw = instructions.split(':');
     var digits = raw[0].split(',').map(function(s) { return parseInt(s, 10); });
     var moves = raw[1].split('');
@@ -21,11 +21,17 @@ var TC = function(L, V) {
     return result;
   }
 
-  function frame(origin, heading) {
+  function _frame(origin, heading) {
     return { origin: origin, heading: heading };
   }
 
-  function step(move, frame) {
+  function _step(move, frame, track) {
+    track = track || _track(15);
+
+    if (!check_no_crash(frame)) {
+      return _frame(frame.origin, frame.heading);
+    }
+
     var F = V.make_vect(1, 0);
     var R = V.make_vect(0, -1);
     var L = V.make_vect(0, 1);
@@ -46,11 +52,24 @@ var TC = function(L, V) {
         throw new Error('invalid move');
     }
     return result;
+    
+    function check_no_crash(frame) {
+      return track.in_track(frame);
+    }
+  }
+
+  function _track(size) {
+    return {
+      in_track: function(frame) {
+        return (V.xcor_vect(frame.origin) < size && V.ycor_vect(frame.origin) < size);
+      }
+    }
   }
 
   return {
-    preprocess: preprocess,
-    frame: frame,
-    step: step
+    preprocess: _preprocess,
+    frame: _frame,
+    step: _step,
+    track: _track
   };
 }(geieslists, geiesvectors);
