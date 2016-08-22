@@ -1,4 +1,4 @@
-var V = function(L) {
+var V = geiesvectors = function(L) {
   var make_vect = (x, y) => L.ArrayToList([x, y]);
   var xcor_vect = L.first;
   var ycor_vect = L.second;
