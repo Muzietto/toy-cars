@@ -124,9 +124,46 @@ describe('toycars', function () {
     });
   });
 
-  xit('prepare lists of instructions for the car to follow', function() {
-    var testFrame = TC.frame(V.make_vect(2,4), V.make_vect(2,3));
-    expect(V.xcor_vect(testFrame.origin)).to.be.equal(2);
-    expect(V.ycor_vect(testFrame.heading)).to.be.equal(3);
+  it('prepare lists of frames that describe a trajectory', function() {
+    var sss = '5,6:FFRLF';
+    var raceData = TC.preprocess(sss);
+    var trajectory = TC.trajectory(raceData);
+    expect(L.size(trajectory)).to.be.equal(6);
+
+    var frameOne = L.first(trajectory);
+    expect(V.xcor_vect(frameOne.origin)).to.be.equal(5);
+    expect(V.ycor_vect(frameOne.origin)).to.be.equal(6);
+    expect(V.xcor_vect(frameOne.heading)).to.be.equal(5);
+    expect(V.ycor_vect(frameOne.heading)).to.be.equal(7);
+
+    var frameTwo = L.second(trajectory);
+    expect(V.xcor_vect(frameTwo.origin)).to.be.equal(5);
+    expect(V.ycor_vect(frameTwo.origin)).to.be.equal(7);
+    expect(V.xcor_vect(frameTwo.heading)).to.be.equal(5);
+    expect(V.ycor_vect(frameTwo.heading)).to.be.equal(8);
+
+    var frameThree = L.third(trajectory);
+    expect(V.xcor_vect(frameThree.origin)).to.be.equal(5);
+    expect(V.ycor_vect(frameThree.origin)).to.be.equal(8);
+    expect(V.xcor_vect(frameThree.heading)).to.be.equal(5);
+    expect(V.ycor_vect(frameThree.heading)).to.be.equal(9);
+
+    var frameFour = L.fourth(trajectory);
+    expect(V.xcor_vect(frameFour.origin)).to.be.equal(5);
+    expect(V.ycor_vect(frameFour.origin)).to.be.equal(9);
+    expect(V.xcor_vect(frameFour.heading)).to.be.equal(6);
+    expect(V.ycor_vect(frameFour.heading)).to.be.equal(9);
+
+    var frameFive = L.fifth(trajectory);
+    expect(V.xcor_vect(frameFive.origin)).to.be.equal(6);
+    expect(V.ycor_vect(frameFive.origin)).to.be.equal(9);
+    expect(V.xcor_vect(frameFive.heading)).to.be.equal(6);
+    expect(V.ycor_vect(frameFive.heading)).to.be.equal(10);
+
+    var frameSix = L.fifth(L.tail(trajectory));
+    expect(V.xcor_vect(frameSix.origin)).to.be.equal(6);
+    expect(V.ycor_vect(frameSix.origin)).to.be.equal(10);
+    expect(V.xcor_vect(frameSix.heading)).to.be.equal(6);
+    expect(V.ycor_vect(frameSix.heading)).to.be.equal(11);
   });
 });
