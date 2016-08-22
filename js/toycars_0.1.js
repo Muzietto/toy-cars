@@ -66,10 +66,22 @@ var TC = function(L, V) {
     }
   }
 
+  function _trajectory(raceData, track) {
+    track = track || _track(15);
+    var startFrame = raceData.startFrame;
+    var moves = raceData.moves;
+
+    return L.reverse(L.foldl((acc, move) => {
+      var currentFrame = L.first(acc);
+      return L.cons(_step(move, currentFrame, track), acc);
+    }, L.List(startFrame), moves));
+  }
+
   return {
     preprocess: _preprocess,
     frame: _frame,
     step: _step,
-    track: _track
+    track: _track,
+    trajectory: _trajectory
   };
 }(geieslists, geiesvectors);
