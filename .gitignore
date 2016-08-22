@@ -1,4 +1,15 @@
 .idea
+.idea/gradle.xml
+.idea/modules.xml
+.idea/vcs.xml
+.gradle
+gradle
+gradlew
+gradlew.bat
+out
+*.iml
+*.ipr
+*.iws
 
 *.class
 
