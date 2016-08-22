@@ -20,8 +20,13 @@ var TC = function(L, V) {
     result.moves = L.ArrayToList(moves);
     return result;
   }
+  
+  function frame(origin, heading) {
+    return { origin: origin, heading: heading };
+  }
 
   return {
-    preprocess: preprocess
+    preprocess: preprocess,
+    frame: frame
   };
 }(geieslists, geiesvectors);

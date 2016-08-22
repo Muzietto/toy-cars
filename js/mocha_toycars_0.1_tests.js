@@ -28,8 +28,8 @@ describe('toycars', function () {
     expect(L.fifth(moves)).to.be.equal('F');
   });
 
-  xit('use frames of reference to represent positions and headings', function() {
-    var testFrame = TC.frame(V.make_vect(2,4),V.make_vect(2,3));
+  it('use frames of reference to represent positions and headings', function() {
+    var testFrame = TC.frame(V.make_vect(2,4), V.make_vect(2,3));
     expect(V.xcor_vect(testFrame.origin)).to.be.equal(2);
     expect(V.ycor_vect(testFrame.heading)).to.be.equal(3);
   });
