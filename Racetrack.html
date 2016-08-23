@@ -7,6 +7,9 @@
         width: 450px;
         margin: 0 auto;
       }
+      p {
+        font-family: Verdana;
+      }
     </style>
     <title>Toycars Races</title>
     <script src="js/lib/geieslists_1.1.js"></script>
@@ -26,7 +29,8 @@
       <form onsubmit="formSubmit();return false;">
         <input type="text" id="instructions" class="instr" style="width:300px;margin-top:15px"></input>
       </form>
-      <p style="font-family:Verdana">Insert string e.g. '2,3:FFRLFR' and press ENTER</p>
+      <p>Insert string and press ENTER</p>
+      <p style="color: red;" id="raceResult">aaaaaa</p>
     </div>
     <script src="js/racetrack.js"></script>
   </body>

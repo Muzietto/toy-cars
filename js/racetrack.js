@@ -8,7 +8,10 @@
 	The Apache 2.0 License - Copyright (c) 2016 Toycars Project
 */
 
+var raceResult = document.getElementById("raceResult");
+raceResult.innerText = '';
 var instructions = document.getElementById("instructions");
+instructions.value = '4,3:FFRFLFFRFFRFFRFFRFFFLFFRFFRFFF';
 
 var canv = document.getElementById("myCanvas");
 var ctx = canv.getContext("2d");
@@ -19,28 +22,32 @@ var canvasHeight = ctx.canvas.clientHeight;
 var car = document.getElementById("toycar");
 
 function formSubmit(event) {
+  raceResult.innerText = '';
   try {
     process_trajectory(TC.trajectory(TC.preprocess(instructions.value)));
   } catch (e) {
     alert('wrong syntax');
   }
-  //instructions.value = '';
 }
 
 function process_trajectory(trajectory) {
-  if (L.isEmpty(trajectory)) return;
+  var carXPos, carYPos;
+  if (L.isEmpty(trajectory)) {
+    return;
+  }
   ctx.resetTransform();
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canv.width, canv.height);
   var currentFrame = L.head(trajectory);
-  var translationMatrix = V.translation_matrix(map_x(V.xcor_vect(currentFrame.origin)), map_y(V.ycor_vect(currentFrame.origin)));
+  carXPos = V.xcor_vect(currentFrame.origin);
+  carYPos = V.ycor_vect(currentFrame.origin);
+  raceResult.innerText = 'Car Position: (' + carXPos + ',' + carYPos + ')';
+  var translationMatrix = V.translation_matrix(map_x(carXPos), map_y(carYPos));
   var rotationMatrix = V.rotation_matrix(V.angle_vect(V.sub_vect(currentFrame.heading, currentFrame.origin)));
   P.transform_ctx(ctx, V.mult_matrix(translationMatrix, rotationMatrix));
-  // draw reference rectangle + dot in origin
-  ctx.drawImage(car, -30, -30);
+  ctx.drawImage(car, -32, -15);
   setTimeout(() => {
     process_trajectory(L.tail(trajectory));
-  }, 1200);
+  }, 120);
 }
 
 function map_x(x_coord) {
