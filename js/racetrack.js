@@ -29,12 +29,15 @@ function formSubmit(event) {
 
 function process_trajectory(trajectory) {
   if (L.isEmpty(trajectory)) return;
+  ctx.resetTransform();
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canv.width, canv.height);
   var currentFrame = L.head(trajectory);
+  var translationMatrix = V.translation_matrix(map_x(V.xcor_vect(currentFrame.origin)), map_y(V.ycor_vect(currentFrame.origin)));
   var rotationMatrix = V.rotation_matrix(V.angle_vect(V.sub_vect(currentFrame.heading, currentFrame.origin)));
-  P.transform_ctx(ctx, rotationMatrix);
-  ctx.drawImage(car, map_x(V.xcor_vect(currentFrame.origin)), map_y(V.ycor_vect(currentFrame.origin)));
+  P.transform_ctx(ctx, V.mult_matrix(translationMatrix, rotationMatrix));
+  // draw reference rectangle + dot in origin
+  ctx.drawImage(car, -30, -30);
   setTimeout(() => {
     process_trajectory(L.tail(trajectory));
   }, 1200);
