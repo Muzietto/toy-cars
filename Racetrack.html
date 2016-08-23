@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <style>
-        .horizon {
+      .horizon {
         width: 450px;
         margin: 0 auto;
-        }
+      }
     </style>
     <title>Toycars Races</title>
     <script src="js/lib/geieslists_1.1.js"></script>
     <script src="js/lib/geiesvectors_0.1.js"></script>
     <script src="js/lib/geiespictures_0.1.js"></script>
     <script src="js/toycars_0.1.js"></script>
-</head>
-<body>
-<div class="horizon">
-    <img id="toycar" src="img/toycar.jpg" style="display:none;"></img>
-    <canvas
-            id="myCanvas"
-            width="450"
-            height="450"
-            style="border:3px solid #d3d3d3;background:#ffffff;">
-        Your&nbsp;browser&nbsp;does&nbsp;not&nbsp;support&nbsp;the&nbsp;HTML5&nbsp;canvas&nbsp;tag.</canvas><br/>
-    <form onsubmit="formSubmit();return false;">
-      <input type="text" id="instructions" class="instr" style="width:300px;margin-top:15px"></input>
-    </form>
-    <p style="font-family:Verdana">Insert string e.g. '2,3:FFRLFR' and press ENTER</p>
-</div>
-
-<script src="js/racetrack.js"></script>
-
-</body>
+  </head>
+  <body>
+    <div class="horizon">
+      <img id="toycar" src="img/toycar.jpg" style="display:none;"></img>
+      <canvas
+        id="myCanvas"
+        width="450"
+        height="450"
+        style="border:3px solid #d3d3d3;background:#ffffff;">
+      Your&nbsp;browser&nbsp;does&nbsp;not&nbsp;support&nbsp;the&nbsp;HTML5&nbsp;canvas&nbsp;tag.</canvas><br/>
+      <form onsubmit="formSubmit();return false;">
+        <input type="text" id="instructions" class="instr" style="width:300px;margin-top:15px"></input>
+      </form>
+      <p style="font-family:Verdana">Insert string e.g. '2,3:FFRLFR' and press ENTER</p>
+    </div>
+    <script src="js/racetrack.js"></script>
+  </body>
 </html>
