@@ -32,7 +32,7 @@ function process_trajectory(trajectory) {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canv.width, canv.height);
   var currentFrame = L.head(trajectory);
-  var rotationMatrix = V.rotation_matrix(V.vect_angle(V.sub_vect(currentFrame.heading, currentFrame.origin)));
+  var rotationMatrix = V.rotation_matrix(V.angle_vect(V.sub_vect(currentFrame.heading, currentFrame.origin)));
   P.transform_ctx(ctx, rotationMatrix);
   ctx.drawImage(car, map_x(V.xcor_vect(currentFrame.origin)), map_y(V.ycor_vect(currentFrame.origin)));
   setTimeout(() => {
