@@ -36,17 +36,19 @@ var TC = function(L, V) {
     var R = V.make_vect(0, -1);
     var L = V.make_vect(0, 1);
     var result = {};
-    result.origin = frame.heading;
     var versor = V.sub_vect(frame.heading, frame.origin);
     switch(move) {
       case 'F':
+        result.origin = frame.heading;
         result.heading = V.add_vect(frame.heading, V.rotate_vect(F, versor));
         break;
       case 'R':
-        result.heading = V.add_vect(frame.heading, V.rotate_vect(R, versor));
+        result.origin = frame.origin;
+        result.heading = V.add_vect(frame.origin, V.rotate_vect(R, versor));
         break;
       case 'L':
-        result.heading = V.add_vect(frame.heading, V.rotate_vect(L, versor));
+        result.origin = frame.origin;
+        result.heading = V.add_vect(frame.origin, V.rotate_vect(L, versor));
         break;
       default:
         throw new Error('invalid move');

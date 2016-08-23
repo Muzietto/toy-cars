@@ -33,7 +33,7 @@ describe('toycars', function () {
     expect(V.ycor_vect(testFrame.heading)).to.be.equal(3);
   });
 
-  describe('create new frames depending on current frame and next move', function () {
+  describe('create new frames of reference depending on current frame and next move', function () {
     it ('refusing invalid moves', function() {
       expect(function() { TC.step('F', TC.frame(V.make_vect(2,4), V.make_vect(2,5)))}).to.not.throw;
       expect(function() { TC.step('R', TC.frame(V.make_vect(2,4), V.make_vect(2,5)))}).to.not.throw;
@@ -51,15 +51,15 @@ describe('toycars', function () {
 
     var moveRightFrame = TC.step('R', startFrame);
     expect(V.xcor_vect(moveRightFrame.origin)).to.be.equal(2);
-    expect(V.ycor_vect(moveRightFrame.origin)).to.be.equal(5);
+    expect(V.ycor_vect(moveRightFrame.origin)).to.be.equal(4);
     expect(V.xcor_vect(moveRightFrame.heading)).to.be.equal(3);
-    expect(V.ycor_vect(moveRightFrame.heading)).to.be.equal(5);
+    expect(V.ycor_vect(moveRightFrame.heading)).to.be.equal(4);
 
     var moveLeftFrame = TC.step('L', startFrame);
     expect(V.xcor_vect(moveLeftFrame.origin)).to.be.equal(2);
-    expect(V.ycor_vect(moveLeftFrame.origin)).to.be.equal(5);
+    expect(V.ycor_vect(moveLeftFrame.origin)).to.be.equal(4);
     expect(V.xcor_vect(moveLeftFrame.heading)).to.be.equal(1);
-    expect(V.ycor_vect(moveLeftFrame.heading)).to.be.equal(5);
+    expect(V.ycor_vect(moveLeftFrame.heading)).to.be.equal(4);
     });
 
     it('starting from a downwards heading', function() {
@@ -72,15 +72,15 @@ describe('toycars', function () {
 
     var moveRightFrame = TC.step('R', startFrame);
     expect(V.xcor_vect(moveRightFrame.origin)).to.be.equal(2);
-    expect(V.ycor_vect(moveRightFrame.origin)).to.be.equal(3);
+    expect(V.ycor_vect(moveRightFrame.origin)).to.be.equal(4);
     expect(V.xcor_vect(moveRightFrame.heading)).to.be.equal(1);
-    expect(V.ycor_vect(moveRightFrame.heading)).to.be.equal(3);
+    expect(V.ycor_vect(moveRightFrame.heading)).to.be.equal(4);
 
     var moveLeftFrame = TC.step('L', startFrame);
     expect(V.xcor_vect(moveLeftFrame.origin)).to.be.equal(2);
-    expect(V.ycor_vect(moveLeftFrame.origin)).to.be.equal(3);
+    expect(V.ycor_vect(moveLeftFrame.origin)).to.be.equal(4);
     expect(V.xcor_vect(moveLeftFrame.heading)).to.be.equal(3);
-    expect(V.ycor_vect(moveLeftFrame.heading)).to.be.equal(3);
+    expect(V.ycor_vect(moveLeftFrame.heading)).to.be.equal(4);
     });
 
     it('starting from a right-facing heading, and so on...', function() {
@@ -92,15 +92,15 @@ describe('toycars', function () {
     expect(V.ycor_vect(moveFrontFrame.heading)).to.be.equal(4);
 
     var moveRightFrame = TC.step('R', startFrame);
-    expect(V.xcor_vect(moveRightFrame.origin)).to.be.equal(3);
+    expect(V.xcor_vect(moveRightFrame.origin)).to.be.equal(2);
     expect(V.ycor_vect(moveRightFrame.origin)).to.be.equal(4);
-    expect(V.xcor_vect(moveRightFrame.heading)).to.be.equal(3);
+    expect(V.xcor_vect(moveRightFrame.heading)).to.be.equal(2);
     expect(V.ycor_vect(moveRightFrame.heading)).to.be.equal(3);
 
     var moveLeftFrame = TC.step('L', startFrame);
-    expect(V.xcor_vect(moveLeftFrame.origin)).to.be.equal(3);
+    expect(V.xcor_vect(moveLeftFrame.origin)).to.be.equal(2);
     expect(V.ycor_vect(moveLeftFrame.origin)).to.be.equal(4);
-    expect(V.xcor_vect(moveLeftFrame.heading)).to.be.equal(3);
+    expect(V.xcor_vect(moveLeftFrame.heading)).to.be.equal(2);
     expect(V.ycor_vect(moveLeftFrame.heading)).to.be.equal(5);
     });
   });
@@ -150,20 +150,31 @@ describe('toycars', function () {
 
     var frameFour = L.fourth(trajectory);
     expect(V.xcor_vect(frameFour.origin)).to.be.equal(5);
-    expect(V.ycor_vect(frameFour.origin)).to.be.equal(9);
+    expect(V.ycor_vect(frameFour.origin)).to.be.equal(8);
     expect(V.xcor_vect(frameFour.heading)).to.be.equal(6);
-    expect(V.ycor_vect(frameFour.heading)).to.be.equal(9);
+    expect(V.ycor_vect(frameFour.heading)).to.be.equal(8);
 
     var frameFive = L.fifth(trajectory);
-    expect(V.xcor_vect(frameFive.origin)).to.be.equal(6);
-    expect(V.ycor_vect(frameFive.origin)).to.be.equal(9);
-    expect(V.xcor_vect(frameFive.heading)).to.be.equal(6);
-    expect(V.ycor_vect(frameFive.heading)).to.be.equal(10);
+    expect(V.xcor_vect(frameFive.origin)).to.be.equal(5);
+    expect(V.ycor_vect(frameFive.origin)).to.be.equal(8);
+    expect(V.xcor_vect(frameFive.heading)).to.be.equal(5);
+    expect(V.ycor_vect(frameFive.heading)).to.be.equal(9);
 
     var frameSix = L.fifth(L.tail(trajectory));
-    expect(V.xcor_vect(frameSix.origin)).to.be.equal(6);
-    expect(V.ycor_vect(frameSix.origin)).to.be.equal(10);
-    expect(V.xcor_vect(frameSix.heading)).to.be.equal(6);
-    expect(V.ycor_vect(frameSix.heading)).to.be.equal(11);
+    expect(V.xcor_vect(frameSix.origin)).to.be.equal(5);
+    expect(V.ycor_vect(frameSix.origin)).to.be.equal(9);
+    expect(V.xcor_vect(frameSix.heading)).to.be.equal(5);
+    expect(V.ycor_vect(frameSix.heading)).to.be.equal(10);
   });
+
+  it('satisfies all given test case trajectories', function() {
+    expect(lastPosition('5,5:RFLFRFLF')).to.be.equal('(7,7)');
+    expect(lastPosition('6,6:FFLFFLFFLFF')).to.be.equal('(6,6)');
+    expect(lastPosition('5,5:FLFLFFRFFF')).to.be.equal('(1,4)');
+  });
+  
+  function lastPosition(raceData) {
+    var lastPosition = L.last(TC.trajectory(TC.preprocess(raceData))).origin;
+    return '(' + V.xcor_vect(lastPosition) + ',' + V.ycor_vect(lastPosition) + ')';
+  }
 });
