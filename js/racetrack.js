@@ -42,7 +42,7 @@ function process_trajectory(trajectory) {
   carYPos = V.ycor_vect(currentFrame.origin);
   raceResult.innerText = 'Car Position: (' + carXPos + ',' + carYPos + ')';
   var translationMatrix = V.translation_matrix(map_x(carXPos), map_y(carYPos));
-  var rotationMatrix = V.rotation_matrix(V.angle_vect(V.sub_vect(currentFrame.heading, currentFrame.origin)));
+  var rotationMatrix = V.rotation_matrix(- V.angle_vect(V.sub_vect(currentFrame.heading, currentFrame.origin)));
   P.transform_ctx(ctx, V.mult_matrix(translationMatrix, rotationMatrix));
   ctx.drawImage(car, -32, -15);
   setTimeout(() => {
