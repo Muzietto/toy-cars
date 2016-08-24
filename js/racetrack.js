@@ -47,7 +47,7 @@ function process_trajectory(trajectory) {
   ctx.drawImage(car, -32, -15);
   setTimeout(() => {
     process_trajectory(L.tail(trajectory));
-  }, 120);
+  }, 500);
 }
 
 function map_x(x_coord) {
